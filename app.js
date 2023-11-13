@@ -33,7 +33,7 @@ playAgain();
 function playGame() {
     guessCount = 0;
     currentPlayer = null;
-    var secretNum = 15;
+    var secretNum = Math.floor(Math.random() * (100-1) + 1);
     getName();
     getGuess();
 
@@ -44,11 +44,9 @@ function playGame() {
         } else if(currentGuess > secretNum) {
             alert(`Sorry ${currentPlayer}, Guess Lower`);
             getGuess();
-                break;
         } else if(currentGuess < secretNum) {
             alert(`Sorry ${currentPlayer}, Guess Higher`);
             getGuess();
-            break;
         }
     }
 
@@ -58,10 +56,12 @@ function playGame() {
             playerList[currentPlayer] = guessCount;
             alert(`That’s Correct ${currentPlayer}! This is your first time beating the game!`);
         }else if(guessCount < playerList[currentPlayer]) {
-            alert(`That’s Correct ${currentPlayer}! And you beat your previous attempt by ${playerList[currentPlayer] - guessCount} fewer guesses!`);
+            alert(`That’s Correct ${currentPlayer}! And you beat your previous attempt by ${playerList[currentPlayer] - guessCount} fewer guesse(s)!`);
             playerList[currentPlayer] = guessCount;
         }else if(guessCount > playerList[currentPlayer]) {
-            alert(`That’s Correct ${currentPlayer}! You did better in your last game by ${guessCount - playerList[currentPlayer]} fewer guesses.`);
+            alert(`That’s Correct ${currentPlayer}! You did better in your last game by ${guessCount - playerList[currentPlayer]} fewer guesse(s).`);
+        } else if(guessCount === playerList[currentPlayer]) {
+            alert(`That’s Correct ${currentPlayer}! You tied your high score for lowest guesses!`);
         }
         playAgain()
     }
