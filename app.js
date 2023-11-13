@@ -28,24 +28,31 @@ function playAgain() {
     }
 }
 
-playGame();
+playAgain();
 
 function playGame() {
     guessCount = 0;
-    var secretNum = Math.floor(Math.random() *(100-1) + 1);
+    currentPlayer = null;
+    var secretNum = 15;
     getName();
     getGuess();
-    
+
     while(currentGuess != secretNum) {
-            if(currentGuess > secretNum) {
-                alert(`Sorry ${currentPlayer}, Guess Lower`);
-                getGuess();
+        if(currentGuess == "" || currentGuess == null) {
+            alert('Game has been cancelled');
+            break;
+        } else if(currentGuess > secretNum) {
+            alert(`Sorry ${currentPlayer}, Guess Lower`);
+            getGuess();
+                break;
         } else if(currentGuess < secretNum) {
             alert(`Sorry ${currentPlayer}, Guess Higher`);
             getGuess();
+            break;
         }
     }
 
+    // game won case
     if(currentGuess == secretNum) {
         if(playerList[currentPlayer] == null) {
             playerList[currentPlayer] = guessCount;
