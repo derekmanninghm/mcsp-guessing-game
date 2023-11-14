@@ -37,7 +37,6 @@ function playGame() {
     guessCount = 0;
     currentPlayer = null;
     var secretNum = Math.floor(Math.random() * (100-1) + 1);
-    console.log(secretNum);
     getName();
     getGuess();
 
