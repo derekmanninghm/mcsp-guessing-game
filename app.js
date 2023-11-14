@@ -1,4 +1,6 @@
-var playerList = {};
+var playerList = {
+    ...localStorage
+};
 var guessCount = null;
 var currentGuess = null;
 var currentPlayer = null;
@@ -26,6 +28,7 @@ function playAgain() {
     if(response ==  'yes' || response == 'y') {
         playGame();
     }
+
 }
 
 playAgain();
@@ -34,8 +37,10 @@ function playGame() {
     guessCount = 0;
     currentPlayer = null;
     var secretNum = Math.floor(Math.random() * (100-1) + 1);
+    console.log(secretNum);
     getName();
     getGuess();
+
 
     while(currentGuess != secretNum) {
         if(currentGuess == "" || currentGuess == null) {
@@ -49,7 +54,6 @@ function playGame() {
             getGuess();
         }
     }
-
     // game won case
     if(currentGuess == secretNum) {
         if(playerList[currentPlayer] == null) {
@@ -60,9 +64,10 @@ function playGame() {
             playerList[currentPlayer] = guessCount;
         }else if(guessCount > playerList[currentPlayer]) {
             alert(`That’s Correct ${currentPlayer}! You did better in your last game by ${guessCount - playerList[currentPlayer]} fewer guesse(s).`);
-        } else if(guessCount === playerList[currentPlayer]) {
+        } else if(guessCount == playerList[currentPlayer]) {
             alert(`That’s Correct ${currentPlayer}! You tied your high score for lowest guesses!`);
         }
+        localStorage.setItem(currentPlayer, playerList[currentPlayer]);
         playAgain()
     }
 }
